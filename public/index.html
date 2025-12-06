@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVO - Freedom on Wheels</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Signup Page -->
+    <div id="signup-page" class="page active">
+        <div class="container">
+            <div class="logo-container">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback">
+                    <h1 class="logo-text">MOVO</h1>
+                    <div class="scooter-icon">🛵</div>
+                </div>
+            </div>
+            <div class="form-container">
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                    <input type="text" id="signup-name" placeholder="Full Name" required>
+                    <input type="email" id="signup-email" placeholder="Email" required>
+                    <input type="tel" id="signup-phone" placeholder="Phone Number" required>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <select id="signup-role" required>
+                        <option value="">Select Role</option>
+                        <option value="user">Rider (User)</option>
+                        <option value="driver">Driver</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                </form>
+                <p class="toggle-link">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+        <div class="container">
+            <div class="logo-container">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback">
+                    <h1 class="logo-text">MOVO</h1>
+                    <div class="scooter-icon">🛵</div>
+                </div>
+            </div>
+            <div class="form-container">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+                <p class="toggle-link">Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-nav" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-nav">
+                    <h1 class="logo-text">MOVO</h1>
+                    <span class="scooter-icon-small">🛵</span>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn-secondary">Logout</button>
+        </nav>
+        <div class="container home-container">
+            <div class="home-logo-center">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-large" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-large">
+                    <h1 class="logo-text-large">MOVO</h1>
+                    <div class="scooter-icon-large">🛵</div>
+                </div>
+            </div>
+            <div class="welcome-section">
+                <h2>Welcome, <span id="user-name">User</span>!</h2>
+                <p class="subtitle">Safe, Comfortable, and Affordable Rides</p>
+            </div>
+            <div class="action-section">
+                <button id="book-ride-btn" class="btn-primary btn-large">Book a Ride</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Ride Page -->
+    <div id="book-ride-page" class="page">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-nav" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-nav">
+                    <h1 class="logo-text">MOVO</h1>
+                    <span class="scooter-icon-small">🛵</span>
+                </div>
+            </div>
+            <button id="back-home-btn" class="btn-secondary">Back</button>
+        </nav>
+        <div class="booking-container">
+            <div class="booking-sidebar">
+                <h2>Book Your Ride</h2>
+                <div class="booking-form">
+                    <div class="input-group">
+                        <label>Pickup Location</label>
+                        <input type="text" id="pickup-location" placeholder="Enter pickup location" required>
+                        <button type="button" id="set-pickup-btn" class="btn-map-action">Set on Map</button>
+                    </div>
+                    <div class="input-group">
+                        <label>Destination</label>
+                        <input type="text" id="destination-location" placeholder="Enter destination" required>
+                        <button type="button" id="set-destination-btn" class="btn-map-action">Set on Map</button>
+                    </div>
+                    <button id="confirm-booking-btn" class="btn-primary">Confirm Booking</button>
+                </div>
+            </div>
+            <div class="booking-map-container">
+                <div id="booking-map" class="map"></div>
+                <div class="map-instruction">Click on the map to set pickup or destination location</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ride Tracking Page -->
+    <div id="tracking-page" class="page">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-nav" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-nav">
+                    <h1 class="logo-text">MOVO</h1>
+                    <span class="scooter-icon-small">🛵</span>
+                </div>
+            </div>
+            <button id="cancel-ride-btn" class="btn-secondary">Cancel Ride</button>
+        </nav>
+        <div class="tracking-container">
+            <div class="ride-info">
+                <h3 id="ride-status-text">Searching for a driver...</h3>
+                <div id="driver-details" style="display: none;">
+                    <p>Driver: <span id="driver-name"></span></p>
+                    <p>Vehicle: <span id="vehicle-info">Pink Scooty</span></p>
+                    <p>ETA: <span id="eta">5 minutes</span></p>
+                </div>
+                <button id="ride-done-btn" class="btn-primary" style="margin-top: 15px; display: none;">Ride Done</button>
+            </div>
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+
+    <!-- <div class="ride-info">
+                <h3>Your Driver is on the way!</h3>
+                <p>Driver: <span id="driver-name">Sarah Ahmed</span></p>
+                <p>Vehicle: <span id="vehicle-info">Pink Scooty - ABC 123</span></p>
+                <p>ETA: <span id="eta">5 minutes</span></p>
+                <button id="ride-done-btn" class="btn-primary" style="margin-top: 15px;">Ride Done</button>
+            </div> -->
+
+    <!-- Ride Complete Page -->
+    <div id="complete-page" class="page">
+        <div class="container complete-container">
+            <div class="complete-content">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-large" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-large">
+                    <h1 class="logo-text-large">MOVO</h1>
+                    <div class="scooter-icon-large">🛵</div>
+                </div>
+                <div class="complete-message">
+                    <h2>Thank You for Using MOVO!</h2>
+                    <p>We hope you had a safe and comfortable ride.</p>
+                    <p class="tagline-complete">Freedom on Wheels 💗</p>
+                </div>
+                <button id="continue-btn" class="btn-primary btn-large">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Driver Page -->
+    <div id="driver-page" class="page">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="MOVOlogo.png" alt="MOVO Logo" class="logo-image-nav" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback-nav">
+                    <h1 class="logo-text">MOVO Driver</h1>
+                    <span class="scooter-icon-small">🛵</span>
+                </div>
+            </div>
+            <button id="driver-logout-btn" class="btn-secondary">Logout</button>
+        </nav>
+        <div class="container">
+            <div class="driver-status">
+                <h2>Driver Dashboard</h2>
+                <p>Status: <span id="driver-status">Available</span></p>
+                <button id="toggle-availability" class="btn-primary">Go Offline</button>
+            </div>
+            <div class="ride-requests">
+                <h3>Ride Requests</h3>
+                <div id="requests-list">
+                    <p class="no-requests">No ride requests at the moment</p>
+                </div>
+            </div>
+            <div id="driver-map" class="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
