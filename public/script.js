@@ -1,5 +1,5 @@
 // Backend API URL
-const API_URL = 'https://movo.up.railway.app/api';
+const API_URL = 'https://movo-production.up.railway.app/api';
 
 // Current user and ride data
 let currentUser = null;
